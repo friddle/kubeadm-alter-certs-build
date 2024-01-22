@@ -1,10 +1,14 @@
-FROM alpine as src
-ARG kubeadm_version 1.25.0
+FROM alpine:latest as src
+ARG kubeadm_version v1.25.0
 WORKDIR /src/
 RUN mkdir /src/kubernetes
 ENV kubeadm_version $kubeadm_version
-RUN wget https://github.friddle.me/kubernetes/kubernetes/archive/${kubeadm_version}.tar.gz -O kubernetes.tar.gz
+ENV https_proxy http://192.168.16.89:10820
+RUN apk add --no-cache curl
+#RUN wget https://github.com/kubernetes/kubernetes/archive/v1.25.0.tar.gz -O /src/kubernetes.tar.gz
+RUN wget https://github.com/kubernetes/kubernetes/archive/${kubeadm_version}.tar.gz -O kubernetes.tar.gz
 RUN tar -zxvf kubernetes.tar.gz --strip-components=1 -C ./kubernetes/
+
 RUN sed -i 's#duration365d*10#duration365d*100#g' ./kubernetes/staging/src/k8s.io/client-go/util/cert/cert.go
 RUN sed -i 's#time.Hour*24*365#time.Hour*24*365*100#g' ./kubernetes/cmd/kubeadm/app/constants/constants.go
 
