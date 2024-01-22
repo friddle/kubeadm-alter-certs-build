@@ -4,8 +4,8 @@ WORKDIR /src/
 RUN mkdir /src/kubernetes
 RUN wget https://github.com/kubernetes/kubernetes/archive/v$kubeadm_version.tar.gz -O kubernetes.tar.gz
 RUN tar -zxvf kubernetes.tar.gz --strip-components=1 -C ./kubernetes/
-RUN sed -i 's#duration365d*10#duration365d*100#g' ./kubernetes/staging/src/k8s.io/client-go/util/cert/cert.go
-RUN sed -i 's#time.Hour*24*365#time.Hour*24*365*100#g' ./kubernetes/cmd/kubeadm/app/constants/constants.go
+RUN sed -i 's#duration365d.*10#duration365d*100#g' ./kubernetes/staging/src/k8s.io/client-go/util/cert/cert.go
+RUN sed -i 's#time.Hour.*365#time.Hour*24*365*100#g' ./kubernetes/cmd/kubeadm/app/constants/constants.go
 
 FROM  registry.aliyuncs.com/google_containers/kube-cross:v1.19-1 as builder
 COPY --from=/src/kubernetes /root/kubernetes/
