@@ -24,4 +24,6 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         body: "compile kubeadm in github action"
+        file_glob: true
+
       
