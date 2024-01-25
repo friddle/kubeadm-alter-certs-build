@@ -14,5 +14,4 @@
 就会在目录/dist 下面有打包好的文件  
 也可以直接使用 release页面   
 
-## 计划
-使用github action来帮助打包
+有需求可以提交issuse.创建分支即可
