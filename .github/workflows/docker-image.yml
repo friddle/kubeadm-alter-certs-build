@@ -18,10 +18,12 @@ jobs:
     - name: to release packages
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{ secrets.REPO_TOKEN }}
         file: dist/dist/kube*
         asset_name: kubeadm_${{ github.ref }}
         tag: ${{ github.ref }}
         overwrite: true
         body: "compile kubeadm in github action"
+        file_glob: true
+
       
