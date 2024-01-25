@@ -1,7 +1,7 @@
 name: Run In Docker Build
 on:
   push:
-    branches: [ "*" ]
+    branches: [ "v*" ]
 jobs:
   build:
     runs-on: ubuntu-latest
